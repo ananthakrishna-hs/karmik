@@ -12,7 +12,7 @@ function Login() {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(id, password);
-    navigate('/dashboard');
+    navigate('/dashboard/home');
   }
 
   return (
