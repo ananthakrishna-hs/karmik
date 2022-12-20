@@ -1,8 +1,17 @@
 import { Container, Navbar, Nav, Button } from 'react-bootstrap';
+import { NavLink, useNavigate } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-import { NavLink } from 'react-router-dom';
+import { setLoggedInUser } from 'data/actions/loggedInUser';
 
-function DashboardNav() {
+function DashboardNav({ dispatch, username }) {
+  const navigate = useNavigate();
+
+  const handleLogout = (event) => {
+    event.preventDefault();
+    dispatch(setLoggedInUser(null));
+    navigate('/');
+  }
 
   return (
     <Navbar collapseOnSelect expand='md' bg='dark' variant='dark'>
@@ -22,8 +31,8 @@ function DashboardNav() {
             </Nav.Link>
           </Nav>
           <Nav>
-            <Navbar.Text>Tyler</Navbar.Text>
-            <Button as={NavLink} to='/' variant='link'>
+            <Navbar.Text>{ username }</Navbar.Text>
+            <Button onClick={event => handleLogout(event)} variant='link'>
               Logout
             </Button>
           </Nav>
@@ -33,4 +42,4 @@ function DashboardNav() {
   )
 }
 
-export default DashboardNav;
+export default connect()(DashboardNav);

@@ -1,19 +1,37 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-function Login() {
+import { setLoggedInUser } from 'data/actions/loggedInUser';
+
+function Login({ users, dispatch }) {
   const [id, setID] = useState('');
   const [password, setPassword] = useState('');
+  const [disabled, setDisabled] = useState(true);
 
   const navigate = useNavigate();
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log(id, password);
-    navigate('/dashboard/home');
+    if (users && users[id] && users[id].password === password) {
+      dispatch(setLoggedInUser(id));
+      navigate('/dashboard/home');
+      alert(`Welcome ${users[id].name}`);
+    } else {
+      alert('Invalid credentials');
+    }
   }
+
+
+  useEffect(() => {
+    if (Object.keys(users).length) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  }, [users])
 
   return (
     <Container fluid>
@@ -31,7 +49,7 @@ function Login() {
               <Form.Control type="password" placeholder="Enter your password" 
                 onChange={event => setPassword(event.target.value)} />
             </Form.Group>
-            <Button variant="primary" type="submit"
+            <Button variant="primary" type="submit" disabled={disabled}
               onClick={event => handleSubmit(event)}>
               Submit
             </Button>
@@ -42,4 +60,8 @@ function Login() {
   )
 }
 
-export default Login;
+const mapStateToProps = ({ users }) => ({
+  users
+});
+
+export default connect(mapStateToProps)(Login);

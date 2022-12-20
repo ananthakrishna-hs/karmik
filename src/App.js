@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { Routes, Route } from 'react-router-dom';
+import { connect } from 'react-redux';
 
 import Login from 'components/Login/Login';
 import NotFound from 'components/NotFound/NotFound';
 import Dashboard from 'components/Dashboard/Dashboard';
+import { handleInitialData } from 'data/actions/shared';
 
-function App() {
+function App({ dispatch }) {
+  useEffect(() => {
+    dispatch(handleInitialData());
+  })
+
   return (
     <React.Fragment>
       <Routes>
@@ -18,4 +24,4 @@ function App() {
   )
 }
 
-export default App;
+export default connect()(App);
