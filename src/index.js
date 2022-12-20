@@ -9,9 +9,10 @@ import { BrowserRouter } from 'react-router-dom';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
-import * as rootReducer from 'data/reducers/main';
+import rootReducer from 'data/reducers/main';
+import middleware from 'data/middleware/main';
 
-const store = createStore(rootReducer);
+const store = createStore(rootReducer, middleware);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
