@@ -1,9 +1,17 @@
 import { Card, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 import { formatDate } from 'utils/helpers';
 
 function QuestionCard({ questionData }) {
+  const navigate = useNavigate();
+
+  const viewQuestion = (event) => {
+    event.preventDefault();
+    navigate(`/dashboard/question/${questionData.id}`);
+  };
+
   return (
     <Card>
       <Card.Body>
@@ -13,7 +21,7 @@ function QuestionCard({ questionData }) {
         </Card.Text>
       </Card.Body>
       <Card.Footer className='text-center'>
-        <Button variant='info'>View</Button>
+        <Button variant='info' onClick={event => viewQuestion(event)}>View</Button>
       </Card.Footer>
     </Card>
   )

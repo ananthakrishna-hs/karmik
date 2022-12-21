@@ -5,8 +5,7 @@ import { connect } from 'react-redux';
 
 import QuestionCard from 'components/QuestionCard/QuestionCard';
 
-function Home ({ votedQuestionIds, toDoQuestionIds, loggedInUser }) {
-  console.log(votedQuestionIds, toDoQuestionIds, loggedInUser);
+function Home ({ votedQuestionIds, toDoQuestionIds }) {
   return (
     <React.Fragment>
       <Container fluid>
@@ -65,8 +64,7 @@ const mapStateToProps = ({ questions, loggedInUser, users }) => {
     ),
     toDoQuestionIds: sortedQuestionIds.filter(questionId =>
       !users[loggedInUser].answers[questionId]
-    ),
-    loggedInUser
+    )
   };
 };
 

@@ -7,6 +7,7 @@ import DashboardNav from 'components/DashboardNav/DashboardNav';
 import Home from 'components/Home/Home';
 import Leaderboard from 'components/Leaderboard/Leaderboard';
 import New from 'components/New/New';
+import QuestionDetail from 'components/QuestionDetail/QuestionDetail';
 
 function Dashboard ({ users, loggedInUser }) {
   const navigate = useNavigate();
@@ -22,13 +23,15 @@ function Dashboard ({ users, loggedInUser }) {
       {
         Object.keys(users).length && (
           <React.Fragment>
-            <DashboardNav username={users[loggedInUser].name} />
+            <DashboardNav username={users[loggedInUser].name} 
+              avatar={users[loggedInUser].avatarURL} />
 
             <Routes>
               <Route path='' element={<Navigate to='home' replace />} />
               <Route path='home' element={<Home />} />
               <Route path='leaderboard' element={<Leaderboard />} />
               <Route path='new' element={<New />} />
+              <Route path='question/:id' element={<QuestionDetail />} />
             </Routes>
           </React.Fragment>
         )

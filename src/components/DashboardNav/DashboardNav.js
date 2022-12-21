@@ -1,10 +1,10 @@
-import { Container, Navbar, Nav, Button } from 'react-bootstrap';
+import { Container, Navbar, Nav, Button, Image } from 'react-bootstrap';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { setLoggedInUser } from 'data/actions/loggedInUser';
 
-function DashboardNav({ dispatch, username }) {
+function DashboardNav({ dispatch, username, avatar }) {
   const navigate = useNavigate();
 
   const handleLogout = (event) => {
@@ -31,7 +31,12 @@ function DashboardNav({ dispatch, username }) {
             </Nav.Link>
           </Nav>
           <Nav>
-            <Navbar.Text>{ username }</Navbar.Text>
+            <Navbar.Text className='pr-2'>
+              <Image src={avatar} roundedCircle={true} width='25px' />
+            </Navbar.Text>
+            <Navbar.Text>
+              { username }
+            </Navbar.Text>
             <Button onClick={event => handleLogout(event)} variant='link'>
               Logout
             </Button>
