@@ -1,10 +1,24 @@
 import { useState } from 'react';
 
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
-function New () {
+import { handleSaveQuestion } from 'data/actions/shared';
+
+function New ({ dispatch }) {
   const [firstOption, setFirstOption] = useState('');
   const [secondOption, setSecondOption] = useState('');
+
+  const navigate = useNavigate();
+
+  const handleSubmit = event => {
+    event.preventDefault();
+
+    dispatch(handleSaveQuestion({
+      firstOption, secondOption
+    }, () => navigate('/dashboard/home')));
+  }
 
   return (
     <Container fluid>
@@ -24,7 +38,8 @@ function New () {
                 onChange={event => setSecondOption(event.target.value)} />
             </Form.Group>
             <Button variant="primary" type="submit" 
-              disabled={!firstOption || !secondOption}>
+              disabled={!firstOption || !secondOption}
+              onClick={event => handleSubmit(event)}>
               Submit
             </Button>
           </Form>
@@ -34,4 +49,4 @@ function New () {
   )
 }
 
-export default New;
+export default connect()(New);
