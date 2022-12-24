@@ -1,4 +1,4 @@
-import { RECEIVE_USERS, SAVE_QUESTION_TO_USER } from 'data/actions/actionTypes';
+import { RECEIVE_USERS, SAVE_QUESTION_TO_USER, SAVE_ANSWER } from 'data/actions/actionTypes';
 
 export default function users(state = {}, action) {
   switch(action.type) {
@@ -13,11 +13,25 @@ export default function users(state = {}, action) {
       questionsCopy.push(questionId);
       return {
         ...state,
-        [action.loggedInUser]: {
-          ...state[action.loggedInUser],
+        [loggedInUser]: {
+          ...state[loggedInUser],
           questions: questionsCopy
         }
       }
+    case SAVE_ANSWER:
+      const { option, userId } = action;
+      const qid = action.questionId;
+
+      return {
+        ...state,
+        [userId]: {
+          ...state[userId],
+          answers: {
+            ...state[userId].answers,
+            [qid]: option
+          }
+        }
+      };
     default:
       return state;
   }

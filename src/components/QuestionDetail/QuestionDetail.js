@@ -4,6 +4,8 @@ import { Card, Container, Row, Col, Button } from 'react-bootstrap';
 import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 
+import { handleSaveAnswer } from 'data/actions/shared';
+
 const withRouter = (Component) => {
   const ComponentWithRouterProp = (props) => {
     let location = useLocation();
@@ -15,7 +17,7 @@ const withRouter = (Component) => {
   return ComponentWithRouterProp;
 }
 
-function QuestionDetail({ author, question, option, router }) {
+function QuestionDetail({ author, question, option, router, dispatch }) {
   const navigate = useNavigate();
   const id = router.params.id;
 
@@ -32,6 +34,12 @@ function QuestionDetail({ author, question, option, router }) {
     votes: optionTwoVotes,
     percentage: totalVotes === 0 ? 0 : Math.round(optionTwoVotes / totalVotes * 10000) / 100
   };
+
+  const handleVote = (event, option) => {
+    event.preventDefault();
+
+    dispatch(handleSaveAnswer(id, option));
+  }
 
 
 
@@ -69,7 +77,9 @@ function QuestionDetail({ author, question, option, router }) {
                         {optionOneStats.votes} ({optionOneStats.percentage}%)
                       </Button>
                     ) : (
-                      <Button variant='primary' className='w-100'>
+                      <Button variant='primary' className='w-100'
+                        onClick={event => handleVote(event, 'optionOne')}
+                      >
                         Select
                       </Button>
                     )
@@ -84,7 +94,9 @@ function QuestionDetail({ author, question, option, router }) {
                         {optionTwoStats.votes} ({optionTwoStats.percentage}%)
                       </Button>
                     ) : (
-                      <Button variant='primary' className='w-100'>
+                      <Button variant='primary' className='w-100'
+                        onClick={event => handleVote(event, 'optionTwo')}
+                      >
                         Select 
                       </Button>
                     )

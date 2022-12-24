@@ -1,4 +1,4 @@
-import { RECEIVE_USERS, SAVE_QUESTION_TO_USER } from 'data/actions/actionTypes';
+import { RECEIVE_USERS, SAVE_ANSWER, SAVE_QUESTION_TO_USER } from 'data/actions/actionTypes';
 
 export function receiveUsers(users) {
   return {
@@ -13,4 +13,13 @@ export function saveQuestionToUser(questionId, loggedInUser) {
     questionId,
     loggedInUser
   }
+}
+
+export function saveAnswerToUser(questionId, option, userId) {
+  return {
+    type: SAVE_ANSWER,
+    questionId,
+    option,
+    userId
+  };
 }

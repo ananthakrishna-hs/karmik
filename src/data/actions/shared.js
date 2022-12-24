@@ -1,7 +1,7 @@
-import { getInitialData, _saveQuestion } from 'utils/_DATA';
+import { getInitialData, _saveQuestion, _saveQuestionAnswer } from 'utils/_DATA';
 
-import { receiveUsers, saveQuestionToUser } from 'data/actions/users';
-import { receiveQuestions, saveQuestion } from 'data/actions/questions';
+import { receiveUsers, saveQuestionToUser, saveAnswerToUser } from 'data/actions/users';
+import { receiveQuestions, saveQuestion, saveAnswerToQuestion } from 'data/actions/questions';
 
 export function handleInitialData() {
   return (dispatch) => {
@@ -29,4 +29,21 @@ export function handleSaveQuestion(question, callback = null) {
       }
     });
   };
+}
+
+export function handleSaveAnswer(questionId, option) {
+  return (dispatch, getState) => {
+    const { loggedInUser } = getState();
+
+    return _saveQuestionAnswer({
+      authedUser: loggedInUser,
+      qid: questionId,
+      answer: option
+    }).then(response => {
+      if (response) {
+        dispatch(saveAnswerToQuestion(questionId, option, loggedInUser));
+        dispatch(saveAnswerToUser(questionId, option, loggedInUser));
+      }
+    })
+  }
 }
