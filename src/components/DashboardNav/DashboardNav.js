@@ -16,7 +16,7 @@ function DashboardNav({ dispatch, username, avatar }) {
   return (
     <Navbar collapseOnSelect expand='md' bg='dark' variant='dark'>
       <Container>
-        <Navbar.Brand href='#home'>Karmik</Navbar.Brand>
+        <Navbar.Brand>Karmik</Navbar.Brand>
         <Navbar.Toggle />
         <Navbar.Collapse className='justify-content-end'>
           <Nav className="me-auto">
