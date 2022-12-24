@@ -19,8 +19,8 @@ function Home ({ votedQuestionIds, toDoQuestionIds }) {
                 <Row>
                   {
                     toDoQuestionIds.map(questionId => (
-                      <Col xs={12} sm={6} md={4} className='mt-3'>
-                        <QuestionCard questionId={questionId} key={questionId} />
+                      <Col xs={12} sm={6} md={4} className='mt-3' key={questionId}>
+                        <QuestionCard questionId={questionId} />
                       </Col>
                     ))
                   }
@@ -39,8 +39,8 @@ function Home ({ votedQuestionIds, toDoQuestionIds }) {
                 <Row>
                   {
                     votedQuestionIds.map(questionId => (
-                      <Col xs={12} sm={6} md={4} className='mt-3'>
-                        <QuestionCard questionId={questionId} key={questionId} />
+                      <Col xs={12} sm={6} md={4} className='mt-3' key={questionId}>
+                        <QuestionCard questionId={questionId} />
                       </Col>
                     ))
                   }
