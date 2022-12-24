@@ -49,7 +49,7 @@ function Login({ users, dispatch }) {
               <Form.Control type="password" placeholder="Enter your password" 
                 onChange={event => setPassword(event.target.value)} />
             </Form.Group>
-            <Button variant="primary" type="submit" disabled={disabled}
+            <Button variant="primary" type="submit" disabled={disabled || (!id || !password)}
               onClick={event => handleSubmit(event)}>
               Submit
             </Button>
