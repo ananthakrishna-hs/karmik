@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import { Card, Container, Row, Col, Button } from 'react-bootstrap';
-import { useParams, useNavigate, useLocation } from 'react-router-dom';
+import { useParams, useNavigate, useLocation, Navigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { handleSaveAnswer } from 'data/actions/shared';
@@ -18,14 +18,8 @@ const withRouter = (Component) => {
 }
 
 function QuestionDetail({ author, question, option, router, dispatch }) {
-  const { navigate, params } = router;
+  const { params } = router;
   const id = params.id;
-
-  useEffect(() => {
-    if (!question) {
-      navigate('404');
-    }
-  }, [question, navigate])
 
   const optionOneVotes = question ? question.optionOne.votes.length : 0;
   const optionTwoVotes = question ? question.optionTwo.votes.length: 0;
@@ -52,7 +46,7 @@ function QuestionDetail({ author, question, option, router, dispatch }) {
       <Row className='justify-content-center mt-4'>
         <Col xs={12} sm={10}>
           {
-            question && (
+            question ? (
               <Card>
                 <Card.Header>Poll By {author.name}</Card.Header>
                 <Card.Body>
@@ -105,6 +99,8 @@ function QuestionDetail({ author, question, option, router, dispatch }) {
                   </Row>
                 </Card.Body>
               </Card>
+            ) : (
+              <Navigate to='/404' replace={true} />
             )
           }
         </Col>
