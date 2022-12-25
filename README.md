@@ -40,5 +40,6 @@ Features of the app:
 - Download/clone the repository.
 - Download the node package manager as per requirements and run `npm install` in terminal.
 - In terminal change directory to the downloaded folder and run `npm start`. The web-app will run at the url `localhost:3000`.
+- Run `npm run test` to run the unit tests present in `src/tests`
 
 
