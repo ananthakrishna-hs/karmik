@@ -36,8 +36,8 @@ function Dashboard ({ users, loggedInUser }) {
               <Route path='' element={<Navigate to='home' replace />} />
               <Route path='home' element={<Home />} />
               <Route path='leaderboard' element={<Leaderboard />} />
-              <Route path='new' element={<New />} />
-              <Route path='question/:id' element={<QuestionDetail />} />
+              <Route path='add' element={<New />} />
+              <Route path='questions/:id' element={<QuestionDetail />} />
               <Route path='*' element={<NotFound />} />
             </Routes>
           </React.Fragment>

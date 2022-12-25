@@ -26,7 +26,7 @@ export function DashboardNav({ dispatch, username, avatar }) {
             <Nav.Link as={NavLink} to='leaderboard'>
               Leaderboard
             </Nav.Link>
-            <Nav.Link as={NavLink} to='new'>
+            <Nav.Link as={NavLink} to='add'>
               New
             </Nav.Link>
           </Nav>

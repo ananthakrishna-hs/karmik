@@ -9,7 +9,7 @@ function QuestionCard({ questionData }) {
 
   const viewQuestion = (event) => {
     event.preventDefault();
-    navigate(`/dashboard/question/${questionData.id}`);
+    navigate(`/dashboard/questions/${questionData.id}`);
   };
 
   return (
