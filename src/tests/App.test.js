@@ -58,7 +58,9 @@ describe('Test Login screen', () => {
 
   it('Alert is thrown when invalid credentials are entered', () => {
     render(
-      <Login users={{'test': {'password': 'test'}}} dispatch={null} />
+      <MemoryRouter>
+        <Login users={{'test': {'password': 'test'}}} dispatch={null} />
+      </MemoryRouter>
     );
 
     const id = screen.getByPlaceholderText('Enter your login ID');
@@ -77,7 +79,9 @@ describe('Test Login screen', () => {
 
   it('Successfull login will not have prompt', () => {
     render(
-      <Login users={{'test': {'password': 'test'}}} dispatch={() => {}} />
+      <MemoryRouter>
+        <Login users={{'test': {'password': 'test'}}} dispatch={() => {}} />
+      </MemoryRouter>
     );
 
     const id = screen.getByPlaceholderText('Enter your login ID');
