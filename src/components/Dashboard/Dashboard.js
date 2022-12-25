@@ -8,7 +8,6 @@ import Home from 'components/Home/Home';
 import Leaderboard from 'components/Leaderboard/Leaderboard';
 import New from 'components/New/New';
 import QuestionDetail from 'components/QuestionDetail/QuestionDetail';
-import NotFound from 'components/NotFound/NotFound';
 
 function Dashboard ({ users, loggedInUser }) {
   const navigate = useNavigate();
@@ -27,7 +26,7 @@ function Dashboard ({ users, loggedInUser }) {
   return (
     <React.Fragment>
       {
-        Object.keys(users).length && (
+        loggedInUser && Object.keys(users).length && (
           <React.Fragment>
             <ConnectedDashboardNav username={users[loggedInUser].name} 
               avatar={users[loggedInUser].avatarURL} />
@@ -38,7 +37,6 @@ function Dashboard ({ users, loggedInUser }) {
               <Route path='leaderboard' element={<Leaderboard />} />
               <Route path='add' element={<New />} />
               <Route path='questions/:id' element={<QuestionDetail />} />
-              <Route path='*' element={<NotFound />} />
             </Routes>
           </React.Fragment>
         )
