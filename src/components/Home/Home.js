@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Container, Row, Col, Card } from 'react-bootstrap';
+import { Container, Row, Col, Card, Tabs, Tab } from 'react-bootstrap';
 import { connect } from 'react-redux';
 
 import QuestionCard from 'components/QuestionCard/QuestionCard';
@@ -11,42 +11,47 @@ function Home ({ votedQuestionIds, toDoQuestionIds }) {
       <Container fluid>
         <Row className='justify-content-center mt-4'>
           <Col xs={10}>
-            <Card>
-              <Card.Header>
-                To Do
-              </Card.Header>
-              <Card.Body>
-                <Row>
-                  {
-                    toDoQuestionIds.map(questionId => (
-                      <Col xs={12} sm={6} md={4} className='mt-3' key={questionId}>
-                        <QuestionCard questionId={questionId} />
-                      </Col>
-                    ))
-                  }
-                </Row>
-              </Card.Body>
-            </Card>
-          </Col>
-        </Row>
-        <Row className='justify-content-center mt-4'>
-          <Col xs={10}>
-            <Card>
-              <Card.Header>
-                Done
-              </Card.Header>
-              <Card.Body>
-                <Row>
-                  {
-                    votedQuestionIds.map(questionId => (
-                      <Col xs={12} sm={6} md={4} className='mt-3' key={questionId}>
-                        <QuestionCard questionId={questionId} />
-                      </Col>
-                    ))
-                  }
-                </Row>
-              </Card.Body>
-            </Card>
+            <Tabs
+              defaultActiveKey='todo'
+              className='mb-3'
+            >
+              <Tab eventKey='todo' title='To Do'>
+              <Card>
+                <Card.Header>
+                  To Do
+                </Card.Header>
+                <Card.Body>
+                  <Row>
+                    {
+                      toDoQuestionIds.map(questionId => (
+                        <Col xs={12} sm={6} md={4} className='mt-3' key={questionId}>
+                          <QuestionCard questionId={questionId} />
+                        </Col>
+                      ))
+                    }
+                  </Row>
+                </Card.Body>
+              </Card>
+              </Tab>
+              <Tab eventKey='done' title='Done'>
+              <Card>
+                <Card.Header>
+                  Done
+                </Card.Header>
+                <Card.Body>
+                  <Row>
+                    {
+                      votedQuestionIds.map(questionId => (
+                        <Col xs={12} sm={6} md={4} className='mt-3' key={questionId}>
+                          <QuestionCard questionId={questionId} />
+                        </Col>
+                      ))
+                    }
+                  </Row>
+                </Card.Body>
+              </Card>
+              </Tab>
+            </Tabs>
           </Col>
         </Row>
       </Container>
