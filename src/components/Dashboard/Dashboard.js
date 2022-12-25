@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import { Routes, Route, Navigate, useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import DashboardNav from 'components/DashboardNav/DashboardNav';
+import { ConnectedDashboardNav } from 'components/DashboardNav/DashboardNav';
 import Home from 'components/Home/Home';
 import Leaderboard from 'components/Leaderboard/Leaderboard';
 import New from 'components/New/New';
@@ -23,7 +23,7 @@ function Dashboard ({ users, loggedInUser }) {
       {
         Object.keys(users).length && (
           <React.Fragment>
-            <DashboardNav username={users[loggedInUser].name} 
+            <ConnectedDashboardNav username={users[loggedInUser].name} 
               avatar={users[loggedInUser].avatarURL} />
 
             <Routes>

@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import { setLoggedInUser } from 'data/actions/loggedInUser';
 
-function DashboardNav({ dispatch, username, avatar }) {
+export function DashboardNav({ dispatch, username, avatar }) {
   const navigate = useNavigate();
 
   const handleLogout = (event) => {
@@ -47,4 +47,4 @@ function DashboardNav({ dispatch, username, avatar }) {
   )
 }
 
-export default connect()(DashboardNav);
+export const ConnectedDashboardNav =  connect()(DashboardNav);

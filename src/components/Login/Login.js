@@ -1,15 +1,18 @@
 import { useState, useEffect } from 'react';
 
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, Toast } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { setLoggedInUser } from 'data/actions/loggedInUser';
 
-function Login({ users, dispatch }) {
+export function Login({ users, dispatch }) {
   const [id, setID] = useState('');
   const [password, setPassword] = useState('');
   const [disabled, setDisabled] = useState(true);
+
+  const [showToast, setShowToast] = useState(false);
+  const [toastMessage, setToastMessage] = useState('');
 
   const navigate = useNavigate();
 
@@ -18,9 +21,9 @@ function Login({ users, dispatch }) {
     if (users && users[id] && users[id].password === password) {
       dispatch(setLoggedInUser(id));
       navigate('/dashboard/home');
-      alert(`Welcome ${users[id].name}`);
     } else {
-      alert('Invalid credentials');
+      setToastMessage('Invalid credentials');
+      setShowToast(true);
     }
   }
 
@@ -37,6 +40,11 @@ function Login({ users, dispatch }) {
     <Container fluid>
       <Row className='justify-content-center mt-4'>
         <Col xs={12} sm={8} md={4}>
+          <Toast onClose={() => setShowToast(false)} show={showToast} 
+            delay={3000} autohide
+          >
+            <Toast.Body>{toastMessage}</Toast.Body>
+          </Toast>
           <Form>
             <Form.Group className="mb-3" controlId="formBasicID">
               <Form.Label>Login ID</Form.Label>
@@ -64,4 +72,4 @@ const mapStateToProps = ({ users }) => ({
   users
 });
 
-export default connect(mapStateToProps)(Login);
+export const ConnectedLogin =  connect(mapStateToProps)(Login);
