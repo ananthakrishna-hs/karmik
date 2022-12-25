@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 
 import { Container, Row, Col, Form, Button, Toast } from 'react-bootstrap';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { setLoggedInUser } from 'data/actions/loggedInUser';
@@ -15,12 +15,13 @@ export function Login({ users, dispatch }) {
   const [toastMessage, setToastMessage] = useState('');
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     if (users && users[id] && users[id].password === password) {
       dispatch(setLoggedInUser(id));
-      navigate('/dashboard/home');
+      navigate(location.state?.path || '/dashboard/home');
     } else {
       setToastMessage('Invalid credentials');
       setShowToast(true);
